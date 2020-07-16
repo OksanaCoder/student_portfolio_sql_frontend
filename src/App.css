@@ -1,10 +1,13 @@
-.App {
-  text-align: center;
+body {
+  background-color: palevioletred !important;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.formSub {
+  background: #FFF4F4;
+  padding: 30px;
+  box-shadow: inset 0px 0px 15px #FFE5E5;
+	-moz-box-shadow: inset 0px 0px 15px #FFE5E5;
+  -webkit-box-shadow: inset 0px 0px 15px #FFE5E5;
+  border: 1px solid #FFD2D2;
 }
 
 @media (prefers-reduced-motion: no-preference) {
