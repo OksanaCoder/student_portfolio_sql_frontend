@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Table, Modal } from 'react-bootstrap'
-import ModalProject from './ModalProject'
-
+// import ModalProject from './ModalProject'
+import Moment from 'react-moment';
 
 class Students extends Component {
     constructor(props){
@@ -11,7 +11,8 @@ class Students extends Component {
             projects: [],
             show: false,
             Mshow: false,
-        
+            show1: false,
+          
              student : {
               name: '',
               surname: '',
@@ -91,7 +92,7 @@ class Students extends Component {
       }
     }
    handleClose() {
-      this.setState({ show: false})
+      this.setState({ show: false, show1: false})
    }
    openAndEdit = async (id) => {
   
@@ -141,7 +142,7 @@ class Students extends Component {
         //console.log(result)
         this.setState({
           projects : result,
-          Mshow: true
+          show1: true
         })
         console.log(result)
       
@@ -154,6 +155,7 @@ class Students extends Component {
       <>
          <div className='container mt-5'>
            <h5><i>Add new user</i></h5>
+         
          <Form className='mt-4 formSub' onSubmit={this.saveStudeent}>
          <Form.Group>
            <Form.Label>Name</Form.Label>
@@ -217,7 +219,7 @@ class Students extends Component {
         <td><Button variant='success' onClick={() => this.openAndEdit(item._id)}>Edit</Button></td>
         <td><Button variant='dark' onClick={() => this.openProject(item._id)}>Project</Button></td>
         </tr>
-        <Modal show={this.state.show} >
+        <Modal show={this.state.show} onHide={() => this.handleClose()}>
         <Modal.Header closeButton>
           <Modal.Title>Edit user</Modal.Title>
         </Modal.Header>
@@ -243,7 +245,7 @@ class Students extends Component {
    
          <Form.Group>
            <Form.Label>Date of Birth</Form.Label>
-           {this.state.student.dateofbirth.split('T')[0]}
+          
            <Form.Control name='dateofbirth' onChange={this.onChangeStudent} value={this.state.student.dateofbirth.split('T')[0]} type="date" />
          </Form.Group>
    
@@ -261,7 +263,7 @@ class Students extends Component {
           </Button>
         </Modal.Footer>
       </Modal>
-      <ModalProject show={this.state.projects} showModal={this.state.Mshow} />
+      
         </>
         
   )
@@ -269,7 +271,48 @@ class Students extends Component {
      )
       }
 
-  
+{/* { this.state.data.projects.map((item, i) => {
+  return (  */}
+ <Modal show={this.state.show1} onHide={() => this.handleClose()}> 
+            <Modal.Header closeButton>
+              <Modal.Title>Project info</Modal.Title>
+            </Modal.Header>
+
+            
+            <Modal.Body>
+            {/* <Table striped bordered hover className='mt-5'>
+      
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date of Creation</th>
+              
+                
+              </tr>
+            <tr>
+          <td>{i+1}</td>
+          <td>{item.projects.projects_name}</td>
+          <td>{item.projects.description}</td>
+         
+          
+          <td><Button variant='danger' onClick={() => this.delItem(item._id)}>Remove</Button></td>
+          <td><Button variant='success' onClick={() => this.openAndEdit(item._id)}>Edit</Button></td>
+          <td><Button variant='dark' onClick={() => this.openProject(item._id)}>Project</Button></td>
+          </tr>
+          </Table> */}
+            </Modal.Body>
+       
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => this.handleClose()}>
+                Close
+              </Button>
+             
+            </Modal.Footer>
+          </Modal>
+          {/* )
+})} */}
+
 </Table>
        </div>
       
