@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Table, Modal, Navbar, Nav, NavDropdown, FormControl } from 'react-bootstrap'
+import { Form, Button, Table, Modal, Navbar, Nav, NavDropdown, FormControl, Pagination } from 'react-bootstrap'
 import Moment from 'react-moment';
 
 class Students extends Component {
@@ -153,7 +153,7 @@ class Students extends Component {
     return (
       <>
         <Navbar expand="lg" className='nav-style'>
-          <Navbar.Brand href="#home" style={{fontWeight: 700}}>StudentPorfolio</Navbar.Brand>
+          <Navbar.Brand href="#home" style={{ fontWeight: 700 }}>StudentPorfolio</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -198,109 +198,109 @@ class Students extends Component {
          </Button>
 
           </Form>
-          
-   
-              <div className="search mt-4">
-                <input style={{fontSize: '13px'}} type="text" className="searchTerm" placeholder="What are you looking for?"/>
-                  <button type="submit" className="searchButton">
-                  Go
+
+
+          <div className="search mt-4">
+            <input style={{ fontSize: '13px' }} type="text" className="searchTerm" placeholder="What are you looking for?" />
+            <button type="submit" className="searchButton">
+              Go
                   </button>
-                 </div>
-  
-
-            <Table striped bordered hover className='mt-4'>
-
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Email</th>
-                <th>Date of Birth</th>
+          </div>
 
 
-              </tr>
+          <Table striped bordered hover className='mt-4'>
+
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>Email</th>
+              <th>Date of Birth</th>
+
+
+            </tr>
 
 
 
 
-              {this.state.data.map((item, i) => {
+            {this.state.data.map((item, i) => {
 
 
-                return (
-                  <>
-                    <tr>
-                      <td>{i + 1}</td>
-                      <td>{item.name}</td>
-                      <td>{item.surname}</td>
-                      <td>{item.email}</td>
-                      <td>{item.dateofbirth}</td>
+              return (
+                <>
+                  <tr>
+                    <td>{i + 1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.surname}</td>
+                    <td>{item.email}</td>
+                    <td>{item.dateofbirth}</td>
 
-                      <td><Button variant='danger' onClick={() => this.delItem(item._id)}>Remove</Button></td>
-                      <td><Button variant='success' onClick={() => this.openAndEdit(item._id)}>Edit</Button></td>
-                      <td><Button variant='dark' onClick={() => this.openProject(item._id)}>Project</Button></td>
-                    </tr>
-                    <Modal show={this.state.show} onHide={() => this.handleClose()}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Edit user</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <Form className='mt-4 formSub' onSubmit={this.saveStudeent}>
-                          <Form.Group>
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control name='name' onChange={this.onChangeStudent} value={this.state.student.name} type="text" placeholder="Enter name" />
-                          </Form.Group>
+                    <td><Button variant='danger' onClick={() => this.delItem(item._id)}>Remove</Button></td>
+                    <td><Button variant='success' onClick={() => this.openAndEdit(item._id)}>Edit</Button></td>
+                    <td><Button variant='dark' onClick={() => this.openProject(item._id)}>Project</Button></td>
+                  </tr>
+                  <Modal show={this.state.show} onHide={() => this.handleClose()}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Edit user</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Form className='mt-4 formSub' onSubmit={this.saveStudeent}>
+                        <Form.Group>
+                          <Form.Label>Name</Form.Label>
+                          <Form.Control name='name' onChange={this.onChangeStudent} value={this.state.student.name} type="text" placeholder="Enter name" />
+                        </Form.Group>
 
-                          <Form.Group>
-                            <Form.Label>Surname</Form.Label>
-                            <Form.Control name='surname' onChange={this.onChangeStudent} value={this.state.student.surname} type="text" placeholder="Enter surname" />
-                          </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Surname</Form.Label>
+                          <Form.Control name='surname' onChange={this.onChangeStudent} value={this.state.student.surname} type="text" placeholder="Enter surname" />
+                        </Form.Group>
 
-                          <Form.Group>
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control name='email' onChange={this.onChangeStudent} value={this.state.student.email} type="email" placeholder="Enter email" />
-                            <Form.Text className="text-muted">
-                              We'll never share your email with anyone else.
+                        <Form.Group>
+                          <Form.Label>Email</Form.Label>
+                          <Form.Control name='email' onChange={this.onChangeStudent} value={this.state.student.email} type="email" placeholder="Enter email" />
+                          <Form.Text className="text-muted">
+                            We'll never share your email with anyone else.
            </Form.Text>
-                          </Form.Group>
+                        </Form.Group>
 
-                          <Form.Group>
-                            <Form.Label>Date of Birth</Form.Label>
+                        <Form.Group>
+                          <Form.Label>Date of Birth</Form.Label>
 
-                            <Form.Control name='dateofbirth' onChange={this.onChangeStudent} value={this.state.student.dateofbirth.split('T')[0]} type="date" />
-                          </Form.Group>
-
-
+                          <Form.Control name='dateofbirth' onChange={this.onChangeStudent} value={this.state.student.dateofbirth.split('T')[0]} type="date" />
+                        </Form.Group>
 
 
-                        </Form>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={() => this.handleClose()}>
-                          Close
+
+
+                      </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={() => this.handleClose()}>
+                        Close
           </Button>
-                        <Button variant="primary" onClick={() => this.editItem(item._id)}>
-                          Save Changes
+                      <Button variant="primary" onClick={() => this.editItem(item._id)}>
+                        Save Changes
           </Button>
-                      </Modal.Footer>
-                    </Modal>
+                    </Modal.Footer>
+                  </Modal>
 
-                  </>
+                </>
 
-                )
-              }
               )
-              }
+            }
+            )
+            }
 
-              {/* { this.state.data.projects.map((item, i) => {
+            {/* { this.state.data.projects.map((item, i) => {
   return (  */}
-              <Modal show={this.state.show1} onHide={() => this.handleClose()}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Project info</Modal.Title>
-                </Modal.Header>
+            <Modal show={this.state.show1} onHide={() => this.handleClose()}>
+              <Modal.Header closeButton>
+                <Modal.Title>Project info</Modal.Title>
+              </Modal.Header>
 
 
-                <Modal.Body>
-                  {/* <Table striped bordered hover className='mt-5'>
+              <Modal.Body>
+                {/* <Table striped bordered hover className='mt-5'>
       
               <tr>
                 <th>#</th>
@@ -321,19 +321,26 @@ class Students extends Component {
           <td><Button variant='dark' onClick={() => this.openProject(item._id)}>Project</Button></td>
           </tr>
           </Table> */}
-                </Modal.Body>
+              </Modal.Body>
 
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={() => this.handleClose()}>
-                    Close
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => this.handleClose()}>
+                  Close
               </Button>
 
-                </Modal.Footer>
-              </Modal>
-              {/* )
+              </Modal.Footer>
+            </Modal>
+            {/* )
 })} */}
 
-            </Table>
+          </Table>
+          <Pagination style={{display: 'flex', justifyContent: 'center'}}>
+            <Pagination.First />     
+            <Pagination.Item className='pag-items' active>{1}</Pagination.Item>
+            <Pagination.Item className='pag-items'>{2}</Pagination.Item>
+            <Pagination.Item className='pag-items'>{3}</Pagination.Item>
+            <Pagination.Last />
+          </Pagination>
         </div>
 
       </>
